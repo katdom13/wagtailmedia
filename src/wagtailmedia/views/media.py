@@ -13,7 +13,6 @@ from wagtail.admin import messages
 from wagtail.admin.auth import PermissionPolicyChecker, permission_denied
 from wagtail.admin.forms.search import SearchForm
 from wagtail.admin.models import popular_tags_for_model
-from wagtail.core.models import Collection
 from wagtail.search.backends import get_search_backends
 
 from wagtailmedia.forms import get_media_form
@@ -23,9 +22,9 @@ from wagtailmedia.utils import paginate
 
 
 try:
-    from wagtail.models import Page
+    from wagtail.models import Collection, Page
 except ImportError:
-    from wagtail.core.models import Page
+    from wagtail.core.models import Collection, Page
 
 if WAGTAIL_VERSION >= (4, 1, 0):
     from wagtail.admin.admin_url_finder import AdminURLFinder

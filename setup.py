@@ -62,7 +62,7 @@ setup(
         "Framework :: Wagtail :: 4",
         "Topic :: Internet :: WWW/HTTP :: Site Management",
     ],
-    install_requires=["wagtail>=2.15", "Django>=3.2"],
+    install_requires=["wagtail==4.2rc1", "Django>=3.2"],
     extras_require={
         "testing": testing_extras,
     },

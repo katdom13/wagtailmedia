@@ -13,7 +13,13 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin.models import get_object_usage
-from wagtail.core.models import CollectionMember
+
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.models import CollectionMember
+else:
+    from wagtail.core.models import CollectionMember
+
 from wagtail.search import index
 from wagtail.search.queryset import SearchableQuerySetMixin
 

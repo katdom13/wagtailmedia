@@ -3,8 +3,14 @@ from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
 from wagtail import VERSION as WAGTAIL_VERSION
-from wagtail.admin.edit_handlers import ObjectList
-from wagtail.core.models import Page
+
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.admin.panels import ObjectList
+    from wagtail.models import Page
+else:
+    from wagtail.admin.edit_handlers import ObjectList
+    from wagtail.core.models import Page
 
 from tests.testapp.models import BlogStreamPage
 from wagtailmedia.edit_handlers import MediaChooserPanel, MediaFieldComparison

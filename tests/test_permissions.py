@@ -7,8 +7,14 @@ from django.test import TestCase
 from django.urls import reverse
 
 from wagtail import VERSION as WAGTAIL_VERSION
-from wagtail.core.models import Collection, GroupCollectionPermission
-from wagtail.tests.utils import WagtailTestUtils
+
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.models import Collection, GroupCollectionPermission
+    from wagtail.test.utils import WagtailTestUtils
+else:
+    from wagtail.core.models import Collection, GroupCollectionPermission
+    from wagtail.tests.utils import WagtailTestUtils
 
 from wagtailmedia import models
 

@@ -14,8 +14,14 @@ from django.test.utils import override_settings
 from django.urls import NoReverseMatch, reverse
 
 from wagtail import VERSION as WAGTAIL_VERSION
-from wagtail.core.models import Collection, GroupCollectionPermission, Page
-from wagtail.tests.utils import WagtailTestUtils
+
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.models import Collection, GroupCollectionPermission, Page
+    from wagtail.test.utils import WagtailTestUtils
+else:
+    from wagtail.core.models import Collection, GroupCollectionPermission, Page
+    from wagtail.tests.utils import WagtailTestUtils
 
 from tests.testapp.models import EventPage, EventPageRelatedMedia
 from wagtailmedia import models
@@ -1062,7 +1068,9 @@ class TestMediaChooserUploadView(TestCase, WagtailTestUtils):
         self.assertEqual(video_form.instance.type, "video")
 
     @override_settings(
-        DEFAULT_FILE_STORAGE="wagtail.tests.dummy_external_storage.DummyExternalStorage"
+        DEFAULT_FILE_STORAGE="wagtail.test.dummy_external_storage.DummyExternalStorage"
+        if WAGTAIL_VERSION >= (3, 0)
+        else "wagtail.tests.dummy_external_storage.DummyExternalStorage"
     )
     def test_upload_with_external_storage(self):
         response = self.client.post(

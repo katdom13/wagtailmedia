@@ -6,8 +6,15 @@ from wagtail.admin.auth import PermissionPolicyChecker
 from wagtail.admin.forms.search import SearchForm
 from wagtail.admin.modal_workflow import render_modal_workflow
 from wagtail.admin.models import popular_tags_for_model
-from wagtail.core import hooks
-from wagtail.core.models import Collection
+
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail import hooks
+    from wagtail.models import Collection
+else:
+    from wagtail.core import hooks
+    from wagtail.core.models import Collection
+
 from wagtail.search.backends import get_search_backends
 from wagtail.utils.version import get_main_version
 
